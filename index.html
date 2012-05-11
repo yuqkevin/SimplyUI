@@ -5,10 +5,12 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="SimplyUi : A Simple, jQuery based, Behavior-Oriented HTML/CSS UI Framework" />
-
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://github.w3softwares.com/js/core.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://github.w3softwares.com/css/core.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>SimplyUi</title>
+    <title>SimplyUI</title>
   </head>
 
   <body>
@@ -18,7 +20,7 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/yuqkevin/SimplyUI">View on GitHub</a>
 
-          <h1 id="project_title">SimplyUi</h1>
+          <h1 id="project_title">SimplyUI</h1>
           <h2 id="project_tagline">A Simple, jQuery based, Behavior-Oriented HTML/CSS UI Framework</h2>
 
             <section id="downloads">
@@ -30,45 +32,453 @@
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
+		<section class="inner"><h3>Requirement</h3>
+		<div class="source"><xmp>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<link rel="stylesheet" href="css/core.css" type="text/css" />
+		</xmp></div>
+		</section>
+		<section class="inner"><h3>Tabs</h3>
+			<span class="w3s-right"><form>
+				<input type="radio" name="ctl" onClick="var ctl=$('#tab-demo').w3sRender();$('#tab-src').hide();" checked>Demo&nbsp;
+				<input type="radio" name="ctl" onClick="var ctl=$('#tab-src').show();$('#tab-demo').hide();">Source
+			</form></span>
+        <div id="tab-demo" class="w3s-tab">
+            <ul><li class="w3s-selected"><a href="#" target="tab-A"><span>Static Tab A</span></a></li>
+                <li><a href="#" target="tab-B"><span>Static Tab B</span></a></li>
+                <li><a href="ajax_box.html" target="tab-C"><span>Ajax (Click)</span></a></li>
+            </ul>
+            <div class="w3s-body" style="height:100px;background:#fff;">
+                <div id="tab-A" class="w3s-mover" style="border:1px dotted gray;">Static A switch by mouseover.<br />Fixed height</div>
+                <div id="tab-B" class="w3s-mover w3s-mainbox" style="border:1px dotted gray;">Static B switch by mouseover.<br />Full height.</div>
+                <div id="tab-C" class="w3s-mainbox" style="border:1px dotted gray;">Ajax loading by click</div>
+            </div>
+        </div>
+		<div id="tab-src" class="source" style="height:150px;border-top:1px dotted gray;overflow:auto;display:none;"><xmp>
+<div class="w3s-tab">
+    <ul><li class="w3s-selected"><a href="#" target="tab-A"><span>Static Tab A</span></a></li>
+        <li><a href="#" target="tab-B"><span>Static Tab B</span></a></li>
+        <li><a href="ajax_box.html" target="tab-C"><span>Ajax (Click)</span></a></li>
+    </ul>
+    <div class="w3s-body" style="height:100px;background:#fff;">
+        <div id="tab-A" class="w3s-mover" style="border:1px dotted gray;">Static A switch by mouseover.<br />Fixed height</div>
+        <div id="tab-B" class="w3s-mover w3s-mainbox" style="border:1px dotted gray;">Static B switch by mouseover.<br />Full height.</div>
+        <div id="tab-C" class="w3s-mainbox" style="border:1px dotted gray;">Ajax loading by click</div>
     </div>
-
+</div>
+		</xmp></div>
+		</section>
+        <section class="inner"><h3>Accordion</h3>
+        	<span class="w3s-right"><form>
+			<input type="radio" name="ctl" onClick="var ctl=$('#accord-demo').w3sRender();$('#accord-src').hide();" checked>Demo&nbsp;
+			<input type="radio" name="ctl" onClick="var ctl=$('#accord-src').show();$('#accord-demo').hide();">Source
+        	</form></span>
+		<div id="accord-demo" class="w3s-accordion" style="height:150px;">
+			<ul><li class="w3s-selected"><a href="#" target="accord-A"><span>Static Tab A</span></a></li>
+		    	<li><a href="#" target="accord-B"><span>Static Tab B</span></a></li>
+        		<li><a href="ajax_box.html"><span>Ajax Tab</span></a></li>
+		    </ul>
+			<div class="w3s-body">
+    			<div id="accord-A">Static A Content</div>
+	    		<div id="accord-B">Static B Content</div>
+			</div>
+		</div>
+		<div id="accord-src" class="source" style="height:90%;border-top:1px dotted gray;overflow:auto;display:none;"><xmp>
+<div class="w3s-accordion" style="height:150px;">
+    <ul><li class="w3s-selected"><a href="#" target="accord-A"><span>Static Tab A</span></a></li>
+        <li><a href="#" target="accord-B"><span>Static Tab B</span></a></li>
+        <li><a href="ajax_box.html"><span>Ajax Tab</span></a></li>
+    </ul>
+    <div class="w3s-body">
+        <div id="accord-A">Static A Content</div>
+        <div id="accord-B">Static B Content</div>
+    </div>
+</div>
+		</xmp></div>
+		</section>
+        <section class="inner"><h3>Menu-Horizone</h3>
+            <span class="w3s-right"><form>
+            <input type="radio" name="ctl" onClick="var ctl=$('#menu-demo').w3sRender();$('#menu-src').hide();" checked>Demo&nbsp;
+            <input type="radio" name="ctl" onClick="var ctl=$('#menu-src').show();$('#menu-demo').hide();">Source
+            </form></span>
+        <div id="menu-demo" class="w3s-menu">
+            <ul>
+                <li><a href="#"><span>Menu A</span></a>
+                    <ul><li><a href="#"><span>Menu A-1</span></a></li>
+                        <li><a href="#"><span>Menu A-2</span></a></li>
+                        <li class="w3s-menutitle"><a ><span>Menu A-3 Title</span></a></li>
+                        <li class="w3s-sub"><a href="#"><span>Menu A-3.1</span></a></li>
+                        <li class="w3s-sub"><a href="#"><span>Menu A-3.2</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span>Menu B</span></a></li>
+                <li class="w3s-last w3s-selected"><a><span>Menu C</span></a>
+                    <ul><li><a href="#"><span>Menu C-1</span></a></li>
+                        <li><a href="#"><span>Menu C-2</span></a></li>
+                        <li class="w3s-menutitle"><a ><span>Menu C-3 Title</span></a></li>
+                        <li class="w3s-sub"><a href="#"><span>Menu C-3.1</span></a></li>
+                        <li class="w3s-sub w3s-selected"><a href="#"><span>Menu C-3.2</span></a></li>
+                        <li><a href="#"><span>Menu C-4</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="menu-src" class="source" style="height:90%;border-top:1px dotted gray;overflow:auto;display:none;"><xmp>
+<div class="w3s-menu">
+    <ul>
+        <li><a href="#"><span>Menu A</span></a>
+            <ul><li><a href="#"><span>Menu A-1</span></a></li>
+                <li><a href="#"><span>Menu A-2</span></a></li>
+                <li class="w3s-menutitle"><a ><span>Menu A-3 Title</span></a></li>
+                <li class="w3s-sub"><a href="#"><span>Menu A-3.1</span></a></li>
+                <li class="w3s-sub"><a href="#"><span>Menu A-3.2</span></a></li>
+            </ul>
+        </li>
+        <li><a href="#"><span>Menu B</span></a></li>
+        <li class="w3s-last w3s-selected"><a><span>Menu C</span></a>
+            <ul><li><a href="#"><span>Menu C-1</span></a></li>
+                <li><a href="#"><span>Menu C-2</span></a></li>
+                <li class="w3s-menutitle"><a ><span>Menu C-3 Title</span></a></li>
+                <li class="w3s-sub"><a href="#"><span>Menu C-3.1</span></a></li>
+                <li class="w3s-sub w3s-selected"><a href="#"><span>Menu C-3.2</span></a></li>
+                <li><a href="#"><span>Menu C-4</span></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+        </xmp></div>
+    	</section>
+        <section class="inner"><h3>Simple Expandable Tree</h3>
+            <span class="w3s-right"><form>
+            <input type="radio" name="ctl" onClick="var ctl=$('#tree-demo').w3sRender();$('#tree-src').hide();" checked>Demo&nbsp;
+            <input type="radio" name="ctl" onClick="var ctl=$('#tree-src').show();$('#tree-demo').hide();">Source
+            </form></span>
+        <div id="tree-demo" class="w3s-tree">
+            <ul>
+                <li><a href="#"><span>Node A</span></a></li>
+                <li><a href="#" class="w3s-title"><span>Node B</span></a>
+                    <ul><li><a href="#"><span>Node B-1</span></a></li>
+                        <li><a href="#"><span>Node B-2</span></a></li>
+                        <li><a ><span>Node B-3 Title</span></a></li>
+                        <li><a href="#"><span>Node B-3.1</span></a></li>
+                        <li><a href="#"><span>Node B-3.2</span></a></li>
+                    </ul>
+                </li>
+                <li><a class="w3s-title"><span>Node C</span></a>
+                    <ul><li><a href="#"><span>Node C-1</span></a></li>
+                        <li><a href="#"><span>Node C-2</span></a></li>
+                        <li><a ><span>Node C-3 Title</span></a></li>
+                        <li><a href="#"><span>Node C-3.1</span></a></li>
+                        <li><a href="#"><span>Node C-3.2</span></a></li>
+                        <li><a href="#"><span>Node C-4</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="tree-src" class="source" style="height:90%;border-top:1px dotted gray;overflow:auto;display:none;"><xmp>
+<div class="w3s-tree">
+    <ul>
+        <li><a href="#"><span>Node A</span></a></li>
+        <li><a href="#" class="w3s-title"><span>Node B</span></a>
+            <ul><li><a href="#"><span>Node B-1</span></a></li>
+                <li><a href="#"><span>Node B-2</span></a></li>
+                <li><a ><span>Node B-3 Title</span></a></li>
+                <li><a href="#"><span>Node B-3.1</span></a></li>
+                <li><a href="#"><span>Node B-3.2</span></a></li>
+            </ul>
+        </li>
+        <li><a class="w3s-title"><span>Node C</span></a>
+            <ul><li><a href="#"><span>Node C-1</span></a></li>
+                <li><a href="#"><span>Node C-2</span></a></li>
+                <li><a ><span>Node C-3 Title</span></a></li>
+                <li><a href="#"><span>Node C-3.1</span></a></li>
+                <li><a href="#"><span>Node C-3.2</span></a></li>
+                <li><a href="#"><span>Node C-4</span></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+        </xmp></div>
+    	</section>
+        <section class="inner"><h3>Rotator Box</h3>
+            <span class="w3s-right"><form>
+            <input type="radio" name="ctl" onClick="var ctl=$('#rotator-demo').w3sRender();$('#rotator-src').hide();" checked>Demo&nbsp;
+            <input type="radio" name="ctl" onClick="var ctl=$('#rotator-src').show();$('#rotator-demo').hide();">Source
+            </form></span>
+        <div id="rotator-demo" style="height:120px;">
+            <div class="w3s-rotator w3s-left" style="height:100px;width:150px;border:1px solid black;">
+				<div>Loop Rotator</div>
+				<div style="background-color:red;">MouseOver can stop rotating.</div>
+				<div style="background-color:yellow;">MouseOver can stop rotating.</div>
+				<div style="background-color:blue;color:white;">MouseOver can stop rotating.</div>
+			</div>
+            <div class="w3s-rotator w3s-nocycle w3s-left" style="height:100px;width:150px;border:1px solid black;margin-left:2em;">
+				<div>Non-Loop Rotator</div>
+                <div style="background-color:red;">MouseOver can stop rotating.</div>
+                <div style="background-color:yellow;">MouseOver can stop rotating.</div>
+                <div style="background-color:blue;color:white;">The last box, end of rotating.</div>
+            </div>
+        </div>
+        <div id="rotator-src" class="source" style="height:90%;border-top:1px dotted gray;overflow:auto;display:none;"><xmp>
+<div class="w3s-rotator">
+    <div>Loop Rotator</div>
+    <div style="background-color:red;">MouseOver can stop rotating.</div>
+    <div style="background-color:yellow;">MouseOver can stop rotating.</div>
+    <div style="background-color:blue;color:white;">MouseOver can stop rotating.</div>
+</div>
+* Adding class w3s-nocycle to div.w3s-rotator will convert rotator to non-loop rotator.
+        </xmp></div>
+    	</section>
+        <section class="inner"><h3>Data Grid</h3>
+            <span class="w3s-right"><form>
+            <input type="radio" name="ctl" onClick="var ctl=$('#grid-demo').w3sRender();$('#grid-src').hide();" checked>Demo&nbsp;
+            <input type="radio" name="ctl" onClick="var ctl=$('#grid-src').show();$('#grid-demo').hide();">Source
+            </form></span>
+			</section>
+        </div>
+		<div id="grid-demo" class="w3s-grid w3s-static" style="height:200px;width:100%;">
+		<table>
+			<caption>FRUIT PRICES</caption>
+			<tr><th>Product</th><th>Variety</th><th>Size/Wt.</th><th>Price</th></tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>AMBROSIA XF 48 / 56CT</td>
+              <td class="w3s-malign">39/40#</td>
+              <td class="w3s-ralign w3s-numeric">59.60</td>
+            </tr>
+            <tr>
+              <td>APPLES </td>
+              <td>BRAEBURN WA XF 100 CT</td>
+              <td class="w3s-malign">39/40#</td>
+              <td class="w3s-ralign w3s-numeric">54.60</td>
+            </tr>
+            <tr>
+              <td>APPLES</td>
+              <td>BRAEBURN WA XF 113 CT</td>
+              <td class="w3s-malign">39/40#</td>
+              <td class="w3s-ralign w3s-numeric">49.40</td>
+            </tr>
+            <tr>
+              <td>APPLES</td>
+              <td>BRAEBURN F/XF 125 CT</td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">47.10</td>
+            </tr>
+            <tr>
+              <td>APPLES</td>
+              <td>BRAEBURN WXF 125 CT</td>
+              <td class="w3s-malign">39/40#</td>
+              <td class="w3s-ralign w3s-numeric">47.20</td>
+            </tr>
+            <tr>
+              <td>APPLES</td>
+              <td>BRAEBURN  WXF 12 x 3#</td>
+              <td class="w3s-malign">36/37#</td>
+              <td class="w3s-ralign w3s-numeric">44.50</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>CAMEO WXF 100 CT</td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">54.70</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>CAMEO WXF 12 x 3#</td>
+              <td class="w3s-malign">36/37#</td>
+              <td class="w3s-ralign w3s-numeric">51.90</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>EMPIRE F/XF 113 CT</td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">56.30</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>EMPIRE F/XF 12 x 3#</td>
+              <td class="w3s-malign">36/37#</td>
+              <td class="w3s-ralign w3s-numeric">37.10</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>FUJI F/XF 100 CT</td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">57.10</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>FUJI F/XF 125 CT</td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">50.70</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>FUJI F/XF 12 x 3#</td>
+              <td class="w3s-malign">36/37#</td>
+              <td class="w3s-ralign w3s-numeric">47.30</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>GALA XF 100 CT</td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">53.30</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>GALA F/XF 113 CT</td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">53.10</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>GALA F/XF 125 CT</td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">51.50</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>GALA F/XF 125 CT</td>
+              <td class="w3s-malign">36/36#</td>
+              <td class="w3s-ralign w3s-numeric">51.10</td>
+            </tr>
+            <tr>
+              <td>APPLES  CA</td>
+              <td>GALA XF 12 x 3#</td>
+              <td class="w3s-malign">36/37#</td>
+              <td class="w3s-ralign w3s-numeric">44.30</td>
+            </tr>
+            <tr>
+              <td>APPLES  CA</td>
+              <td>GALA F 12 x 3#</td>
+              <td class="w3s-malign">36/37#</td>
+              <td class="w3s-ralign w3s-numeric">44.30</td>
+            </tr>
+            <tr>
+              <td>APPLES</td>
+              <td>GOLDEN DELICIOUS F/XF 72 CT</td>
+              <td class="w3s-malign">39/40#</td>
+              <td class="w3s-ralign w3s-numeric">39.20</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>GOLDEN DELICIOUS F/XF 100 CT </td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">53.50</td>
+            </tr>
+            <tr>
+              <td>APPLES CA</td>
+              <td>GOLDEN DELICIOUS F/XF 113 CT </td>
+              <td class="w3s-malign">38/39#</td>
+              <td class="w3s-ralign w3s-numeric">49.10</td>
+            </tr>
+            <tr>
+              <td>APPLES</td>
+              <td>GOLDEN DELICIOUS F/XF 12 x 3#</td>
+              <td class="w3s-malign">36/37#</td>
+              <td class="w3s-ralign w3s-numeric">30.30</td>
+            </tr>
+            <tr>
+              <td>APPLES</td>
+              <td>GRANNY SMITH F/XF 56 CT</td>
+              <td class="w3s-malign">40/41#</td>
+              <td class="w3s-ralign w3s-numeric">43.80</td>
+            </tr>
+			<tr class="w3s-footer"><td>Footer</td><td colspan="3">This is optional footer of grid.</td></tr>
+		</table>
+		</div>
+        <div id="grid-src" class="source" style="height:90%;border-top:1px dotted gray;overflow:auto;display:none;"><xmp>
+<div class="w3s-grid w3s-static" style="height:200px;width:100%;">
+<table>
+    <caption>FRUIT PRICES</caption>
+    <tr><th>Product</th><th>Variety</th><th>Size/Wt.</th><th>Price</th></tr>
+    <tr>
+      <td>APPLES CA</td>
+      <td>AMBROSIA XF 48 / 56CT</td>
+      <td class="w3s-malign">39/40#</td>
+      <td class="w3s-ralign w3s-numeric">59.60</td>
+    </tr>
+    <tr>
+      <td>APPLES </td>
+      <td>BRAEBURN WA XF 100 CT</td>
+      <td class="w3s-malign">39/40#</td>
+      <td class="w3s-ralign w3s-numeric">54.60</td>
+    </tr>
+	...
+    <tr class="w3s-footer"><td>Footer</td><td colspan="3">This is optional footer of grid.</td></tr>
+</table>
+</div>
+        </xmp></div>
+    	</section>
+        <section class="inner"><h3>Dialog & Trigger Buttons</h3>
+		<div id="page-body">
+		<table class="w3s-list">
+			<tr><th>Trigger</th><th>Sample Code</th><th>Demo</th></tr>
+			<tr><td>Popup</td>
+				<td><pre>&lt;a href="ajax_box.html" class="w3s-trigger w3s-modal" name="popup"&gt;Popup&lt;/a&gt;</pre></td>
+				<td><div class="w3s-button"><a href="ajax_box.html?2" class="w3s-trigger w3s-modal" name="popup">Popup</a></div></td></tr>
+            <tr><td>Overlap</td>
+                <td><pre>&lt;a href="ajax_box.html" class="w3s-trigger" name="overlap"&gt;Overlap&lt;/a&gt;</pre></td>
+                <td><div class="w3s-button"><a href="ajax_box.html?2" class="w3s-trigger" name="overlap" target="page-body">Overlap</a></div></td></tr>
+            <tr><td>Action</td>
+                <td><pre>&lt;a href="ajax-action-url" class="w3s-trigger" name="action"<br /> rel="Do you really want to continue?"&gt;Ajax Action&lt;/a&gt;</pre></td>
+                <td><div class="w3s-button"><a href="../examples/ajax.html?2" class="w3s-trigger" name="action" rel="Do you really want to continue?">Ajax Action</a></div></td></tr>
+			<tr><td>Dropdown Box</td><td><pre>
+&lt;div class="w3s-dropdown"&gt;&lt;
+    span class="w3s-header"&gt;Dropdown&lt;/span&gt;
+    &lt;div class="w3s-body"&gt;Dropdown box Content&lt;/div&gt;
+&lt;/div&gt;
+				</pre></td><td valign="top">
+					<div class="w3s-dropdown">
+						<span class="w3s-header">Dropdown (Left)</span>
+						<div class="w3s-body">Dropdown box Content</div>
+					</div><br /><br />
+					<div class="w3s-dropdown w3s-lalign w3s-right">
+						<span class="w3s-header">Dropdown (Right)</span>
+						<div class="w3s-body">Dropdown box Content</div>
+					</div>
+			</td></tr>
+		</table>
+		</div>
+    	</section>
+        <section class="inner"><h3>Miscellaneous</h3>
+		<table class="w3s-list">
+			<tr><th>Widget</th><th>Source Code</th><th>Demo</th></tr>
+			<tr class="w3s-bar"><td>Button Bar</td><td><pre>&lt;tr class="w3s-bar"&gt;&lt;div class="w3s-button"&gt;buttons...&lt;/div&gt;</pre></td>
+				<td><div class="w3s-button"><a href="#">Button</a><a href="#" class="w3s-icon w3s-icon-up"> </a><a href="#" class="w3s-left-icon w3s-icon-edit">Edit</a></div></td></tr>
+			<tr><td>Checkall Checkbox</td><td><pre>
+&lt;input type="checkbox" class="w3s-checkall" name="mycheckall"/&gt;Check All
+&lt;input type="checkbox" class="mycheckall" name="val[]"/&gt;Box 1
+&lt;input type="checkbox" class="mycheckall" name="val[]"/&gt;Box 2
+				</pre></td>
+				<td><input type="checkbox" class="w3s-checkall" name="mycheckall"/>Check All<br />
+					<input type="checkbox" class="mycheckall" name="val[]"/>Box1&nbsp;
+					<input type="checkbox" class="mycheckall" name="val[]"/>Box2</td></tr>
+			<tr><td>Editable Cell</td><td><pre>&lt;input type="text" class="w3s-cell" value="try to change text here"/&gt;</pre></td>
+    			<td><input type="text" class="w3s-cell" width="100px;" value="try to change text here"/></td></tr>
+			<tr class="w3s-clone"><td>Row Clone</td><td><pre>
+&lt;tr class="w3s-clone"&gt;&lt;td&gt;...&lt;/td&gt;&lt;td class="w3s-button"&gt;
+	&lt;a&gt; class="w3s-clone w3s-icon w3s-icon-add"&lt;/a&gt;&lt;/tr&gt;
+				</pre></td>
+				<td class="w3s-button"><a name="clone" class="w3s-trigger w3s-icon w3s-icon-add"></a></td></tr>
+			<tr><td>Autocomplete</td><td><pre>
+&lt;input type="text" class="w3s-autocomplete" src="#_w3s_autocomplete"/&gt;</pre></td>
+			    <td><input type="text" class="w3s-autocomplete" width="100px;" src="#_w3s_autocomplete"/><span class="w3s-hidden" id="_w3s_autocomplete">automobile,car,care,hi</span></td></tr>
+		</table>
+    	</section>
+    </div>
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">SimplyUi maintained by <a href="https://github.com/yuqkevin">yuqkevin</a></p>
+        <p class="copyright">SimplyUi maintained by <a href="https://github.com/yuqkevin">Qiang Yu</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-
     
+    <script type="text/javascript">
+        $('input:radio[name=ctl]:checked').each(function(){$(this).trigger('click');});
+    </script>
 
   </body>
 </html>
