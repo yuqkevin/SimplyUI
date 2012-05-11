@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>W3S SimplyUI</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://github.w3softwares.com/js/core.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="http://github.w3softwares.com/css/core.css">
+<style>
+#page-header {background:#888;color:#fff;}
+#page-footer {background:#333;color:#888;}
+#page-header>div.w3s-wrapper {background:#aaa;}
+#page-footer>div.w3s-wrapper {background:#888;color:#fff;}
+#page-header>div.w3s-wrapper>div,#page-footer>div.w3s-wrapper>div {padding:5px;}
+body>div.w3s-body>.w3s-wrapper {background-color:#ccc;}
+.source {background:#666;color:#fff;}
+.source xmp,pre {padding:0 .5em;margin:0;}
+div.widget {border-bottom:1px dotted gray;}
+</style>
+</head>
+<body>
+<div class="w3s-header" id="page-header"><div class="w3s-wrapper"><div>
+     <header class="inner">
+       <a id="forkme_banner" href="https://github.com/yuqkevin/SimplyUI">View on GitHub</a>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="SimplyUi : A Simple, jQuery based, Behavior-Oriented HTML/CSS UI Framework" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="http://github.w3softwares.com/js/core.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="http://github.w3softwares.com/css/core.css">
+       <h1 id="project_title">SimplyUI</h1>
+       <h2 id="project_tagline">A Simple, jQuery based, Behavior-Oriented HTML/CSS UI Framework</h2>
 
-    <title>SimplyUI</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/yuqkevin/SimplyUI">View on GitHub</a>
-
-          <h1 id="project_title">SimplyUI</h1>
-          <h2 id="project_tagline">A Simple, jQuery based, Behavior-Oriented HTML/CSS UI Framework</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/yuqkevin/SimplyUI/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/yuqkevin/SimplyUI/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-		<section class="inner"><h3>Requirement</h3>
+         <section id="downloads">
+           <a class="zip_download_link" href="https://github.com/yuqkevin/SimplyUI/zipball/master">Download this project as a .zip file</a>
+           <a class="tar_download_link" href="https://github.com/yuqkevin/SimplyUI/tarball/master">Download this project as a tar.gz file</a>
+         </section>
+     </header>
+</div></div></div>
+<div class="w3s-body" style="background-color:#aaa;">
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; height:80px;">
+		<div><strong>Requirement</strong></div>
 		<div class="source"><xmp>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
 <link rel="stylesheet" href="css/core.css" type="text/css" />
 		</xmp></div>
-		</section>
-		<section class="inner"><h3>Tabs</h3>
+	</div></div>
+	<p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; height:150px;">
+		<div><strong>Tabs</strong>
 			<span class="w3s-right"><form>
 				<input type="radio" name="ctl" onClick="var ctl=$('#tab-demo').w3sRender();$('#tab-src').hide();" checked>Demo&nbsp;
 				<input type="radio" name="ctl" onClick="var ctl=$('#tab-src').show();$('#tab-demo').hide();">Source
 			</form></span>
+			<p class="w3s-clear" />
+		</div>
         <div id="tab-demo" class="w3s-tab">
             <ul><li class="w3s-selected"><a href="#" target="tab-A"><span>Static Tab A</span></a></li>
                 <li><a href="#" target="tab-B"><span>Static Tab B</span></a></li>
@@ -68,12 +74,16 @@
     </div>
 </div>
 		</xmp></div>
-		</section>
-        <section class="inner"><h3>Accordion</h3>
+	</div></div>
+	<p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; height:180px;position:relative;">
+        <div><strong>Accordion</strong>
         	<span class="w3s-right"><form>
 			<input type="radio" name="ctl" onClick="var ctl=$('#accord-demo').w3sRender();$('#accord-src').hide();" checked>Demo&nbsp;
 			<input type="radio" name="ctl" onClick="var ctl=$('#accord-src').show();$('#accord-demo').hide();">Source
         	</form></span>
+			<p class="w3s-clear" />
+		</div>
 		<div id="accord-demo" class="w3s-accordion" style="height:150px;">
 			<ul><li class="w3s-selected"><a href="#" target="accord-A"><span>Static Tab A</span></a></li>
 		    	<li><a href="#" target="accord-B"><span>Static Tab B</span></a></li>
@@ -96,12 +106,16 @@
     </div>
 </div>
 		</xmp></div>
-		</section>
-        <section class="inner"><h3>Menu-Horizone</h3>
+	</div></div>
+	<p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:50px;">
+        <div><strong>Menu-Horizone</strong>
             <span class="w3s-right"><form>
             <input type="radio" name="ctl" onClick="var ctl=$('#menu-demo').w3sRender();$('#menu-src').hide();" checked>Demo&nbsp;
             <input type="radio" name="ctl" onClick="var ctl=$('#menu-src').show();$('#menu-demo').hide();">Source
             </form></span>
+			<p class="w3s-clear" />
+        </div>
         <div id="menu-demo" class="w3s-menu">
             <ul>
                 <li><a href="#"><span>Menu A</span></a>
@@ -148,12 +162,16 @@
     </ul>
 </div>
         </xmp></div>
-    	</section>
-        <section class="inner"><h3>Simple Expandable Tree</h3>
+    </div></div>
+    <p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;">
+        <div><strong>Simple Expandable Tree</strong>
             <span class="w3s-right"><form>
             <input type="radio" name="ctl" onClick="var ctl=$('#tree-demo').w3sRender();$('#tree-src').hide();" checked>Demo&nbsp;
             <input type="radio" name="ctl" onClick="var ctl=$('#tree-src').show();$('#tree-demo').hide();">Source
             </form></span>
+			<p class="w3s-clear" />
+        </div>
         <div id="tree-demo" class="w3s-tree">
             <ul>
                 <li><a href="#"><span>Node A</span></a></li>
@@ -200,12 +218,16 @@
     </ul>
 </div>
         </xmp></div>
-    	</section>
-        <section class="inner"><h3>Rotator Box</h3>
+    </div></div>
+    <p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:100px;position:relative;">
+        <div><strong>Rotator Box</strong>
             <span class="w3s-right"><form>
             <input type="radio" name="ctl" onClick="var ctl=$('#rotator-demo').w3sRender();$('#rotator-src').hide();" checked>Demo&nbsp;
             <input type="radio" name="ctl" onClick="var ctl=$('#rotator-src').show();$('#rotator-demo').hide();">Source
             </form></span>
+			<p class="w3s-clear" />
+        </div>
         <div id="rotator-demo" style="height:120px;">
             <div class="w3s-rotator w3s-left" style="height:100px;width:150px;border:1px solid black;">
 				<div>Loop Rotator</div>
@@ -229,13 +251,15 @@
 </div>
 * Adding class w3s-nocycle to div.w3s-rotator will convert rotator to non-loop rotator.
         </xmp></div>
-    	</section>
-        <section class="inner"><h3>Data Grid</h3>
+    </div></div>
+    <p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:200px;position:relative;">
+        <div><strong>Data Grid</strong>
             <span class="w3s-right"><form>
             <input type="radio" name="ctl" onClick="var ctl=$('#grid-demo').w3sRender();$('#grid-src').hide();" checked>Demo&nbsp;
             <input type="radio" name="ctl" onClick="var ctl=$('#grid-src').show();$('#grid-demo').hide();">Source
             </form></span>
-			</section>
+			<p class="w3s-clear" />
         </div>
 		<div id="grid-demo" class="w3s-grid w3s-static" style="height:200px;width:100%;">
 		<table>
@@ -410,8 +434,10 @@
 </table>
 </div>
         </xmp></div>
-    	</section>
-        <section class="inner"><h3>Dialog & Trigger Buttons</h3>
+    </div></div>
+    <p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;">
+        <div><strong>Dialog & Trigger Buttons</strong></div>
 		<div id="page-body">
 		<table class="w3s-list">
 			<tr><th>Trigger</th><th>Sample Code</th><th>Demo</th></tr>
@@ -441,8 +467,10 @@
 			</td></tr>
 		</table>
 		</div>
-    	</section>
-        <section class="inner"><h3>Miscellaneous</h3>
+    </div></div>
+    <p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;position:relative;">
+        <div><strong>Miscellaneous</strong></div>
 		<table class="w3s-list">
 			<tr><th>Widget</th><th>Source Code</th><th>Demo</th></tr>
 			<tr class="w3s-bar"><td>Button Bar</td><td><pre>&lt;tr class="w3s-bar"&gt;&lt;div class="w3s-button"&gt;buttons...&lt;/div&gt;</pre></td>
@@ -466,19 +494,13 @@
 &lt;input type="text" class="w3s-autocomplete" src="#_w3s_autocomplete"/&gt;</pre></td>
 			    <td><input type="text" class="w3s-autocomplete" width="100px;" src="#_w3s_autocomplete"/><span class="w3s-hidden" id="_w3s_autocomplete">automobile,car,care,hi</span></td></tr>
 		</table>
-    	</section>
-    </div>
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">SimplyUi maintained by <a href="https://github.com/yuqkevin">Qiang Yu</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-    
-    <script type="text/javascript">
-        $('input:radio[name=ctl]:checked').each(function(){$(this).trigger('click');});
-    </script>
-
-  </body>
+    </div></div>
+    <p class="w3s-clear" />
+	<br />
+</div>
+<div class="w3s-footer" id="page-footer"><div class="w3s-wrapper"><div class="w3s-ralign">W3Softwares.COM &reg;</div></div></div>
+<script type="text/javascript">
+	$('input:radio[name=ctl]:checked').each(function(){$(this).trigger('click');});
+</script>
+</body>
 </html>
