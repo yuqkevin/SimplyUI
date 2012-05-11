@@ -26,11 +26,7 @@ header h2 {
   background: url('../images/bg_hr.png') repeat-x bottom;
 }
 
-footer p {
-  color: #f2f2f2;
-}
-
-a {
+header a {
   text-decoration: none;
   color: #007edf;
   text-shadow: none;
