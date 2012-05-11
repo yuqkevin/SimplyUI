@@ -457,6 +457,49 @@ table td {padding:3px;}
 		</div>
     </div></div>
     <p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;position:relative;">
+        <div><strong>Miscellaneous</strong></div>
+        <table class="w3s-list">
+            <tr><th>Widget</th><th>Source Code</th><th>Demo</th></tr>
+            <tr class="w3s-bar"><td>Button Bar</td><td><pre>&lt;tr class="w3s-bar"&gt;&lt;div class="w3s-button"&gt;buttons...&lt;/div&gt;</pre></td>
+                <td><div class="w3s-button"><a href="#">Button</a><a href="#" class="w3s-icon w3s-icon-up"> </a><a href="#" class="w3s-left-icon w3s-icon-edit">Edit</a></div></td></tr>
+            <tr><td>Checkall Checkbox</td><td><pre>
+&lt;input type="checkbox" class="w3s-checkall" name="mycheckall"/&gt;Check All
+&lt;input type="checkbox" class="mycheckall" name="val[]"/&gt;Box 1
+&lt;input type="checkbox" class="mycheckall" name="val[]"/&gt;Box 2
+                </pre></td>
+                <td><input type="checkbox" class="w3s-checkall" name="mycheckall"/>Check All<br />
+                    <input type="checkbox" class="mycheckall" name="val[]"/>Box1&nbsp;
+                    <input type="checkbox" class="mycheckall" name="val[]"/>Box2</td></tr>
+            <tr><td>Editable Cell</td><td><pre>&lt;input type="text" class="w3s-cell" value="try to change text here"/&gt;</pre></td>
+                <td><input type="text" class="w3s-cell" width="100px;" value="try to change text here"/></td></tr>
+            <tr class="w3s-clone"><td>Row Clone</td><td><pre>
+&lt;tr class="w3s-clone"&gt;&lt;td&gt;...&lt;/td&gt;&lt;td class="w3s-button"&gt;
+    &lt;a&gt; class="w3s-clone w3s-icon w3s-icon-add"&lt;/a&gt;&lt;/tr&gt;
+                </pre></td>
+                <td class="w3s-button"><a name="clone" class="w3s-trigger w3s-icon w3s-icon-add"></a></td></tr>
+            <tr><td>Autocomplete</td><td><pre>
+&lt;input type="text" class="w3s-autocomplete" src="#_w3s_autocomplete"/&gt;</pre></td>
+                <td><input type="text" class="w3s-autocomplete" width="100px;" src="#_w3s_autocomplete"/><span class="w3s-hidden" id="_w3s_autocomplete">automobile,car,care,hi</span></td></tr>
+            <tr><td>Dropdown Box</td><td><pre>
+&lt;div class="w3s-dropdown"&gt;&lt;
+    span class="w3s-header"&gt;Dropdown&lt;/span&gt;
+    &lt;div class="w3s-body"&gt;Dropdown box Content&lt;/div&gt;
+&lt;/div&gt;
+                </pre></td><td valign="top">
+                    <div class="w3s-dropdown">
+                        <span class="w3s-header">Dropdown (Left)</span>
+                        <div class="w3s-body">Dropdown box Content</div>
+                    </div><br /><br />
+                    <div class="w3s-dropdown w3s-lalign w3s-right">
+                        <span class="w3s-header">Dropdown (Right)</span>
+                        <div class="w3s-body">Dropdown box Content</div>
+                    </div>
+            </td></tr>
+        </table>
+    </div></div>
+    <p class="w3s-clear" />
+	<hr />
     <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;">
         <div><strong>Trigger Definitions</strong></div>
         <table class="w3s-list">
@@ -516,48 +559,6 @@ table td {padding:3px;}
         <tr><td><strong>data</strong>(optional)</td><td>Parameters (seperated by ',') for calling function.</td></tr>
         <tr><td><strong>action</strong>(optional)</td><td>For "trigger" success. The action name.</tr>
         </table>
-    </div></div>
-    <p class="w3s-clear" />
-    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;position:relative;">
-        <div><strong>Miscellaneous</strong></div>
-		<table class="w3s-list">
-			<tr><th>Widget</th><th>Source Code</th><th>Demo</th></tr>
-			<tr class="w3s-bar"><td>Button Bar</td><td><pre>&lt;tr class="w3s-bar"&gt;&lt;div class="w3s-button"&gt;buttons...&lt;/div&gt;</pre></td>
-				<td><div class="w3s-button"><a href="#">Button</a><a href="#" class="w3s-icon w3s-icon-up"> </a><a href="#" class="w3s-left-icon w3s-icon-edit">Edit</a></div></td></tr>
-			<tr><td>Checkall Checkbox</td><td><pre>
-&lt;input type="checkbox" class="w3s-checkall" name="mycheckall"/&gt;Check All
-&lt;input type="checkbox" class="mycheckall" name="val[]"/&gt;Box 1
-&lt;input type="checkbox" class="mycheckall" name="val[]"/&gt;Box 2
-				</pre></td>
-				<td><input type="checkbox" class="w3s-checkall" name="mycheckall"/>Check All<br />
-					<input type="checkbox" class="mycheckall" name="val[]"/>Box1&nbsp;
-					<input type="checkbox" class="mycheckall" name="val[]"/>Box2</td></tr>
-			<tr><td>Editable Cell</td><td><pre>&lt;input type="text" class="w3s-cell" value="try to change text here"/&gt;</pre></td>
-    			<td><input type="text" class="w3s-cell" width="100px;" value="try to change text here"/></td></tr>
-			<tr class="w3s-clone"><td>Row Clone</td><td><pre>
-&lt;tr class="w3s-clone"&gt;&lt;td&gt;...&lt;/td&gt;&lt;td class="w3s-button"&gt;
-	&lt;a&gt; class="w3s-clone w3s-icon w3s-icon-add"&lt;/a&gt;&lt;/tr&gt;
-				</pre></td>
-				<td class="w3s-button"><a name="clone" class="w3s-trigger w3s-icon w3s-icon-add"></a></td></tr>
-			<tr><td>Autocomplete</td><td><pre>
-&lt;input type="text" class="w3s-autocomplete" src="#_w3s_autocomplete"/&gt;</pre></td>
-			    <td><input type="text" class="w3s-autocomplete" width="100px;" src="#_w3s_autocomplete"/><span class="w3s-hidden" id="_w3s_autocomplete">automobile,car,care,hi</span></td></tr>
-			<tr><td>Dropdown Box</td><td><pre>
-&lt;div class="w3s-dropdown"&gt;&lt;
-    span class="w3s-header"&gt;Dropdown&lt;/span&gt;
-    &lt;div class="w3s-body"&gt;Dropdown box Content&lt;/div&gt;
-&lt;/div&gt;
-				</pre></td><td valign="top">
-					<div class="w3s-dropdown">
-						<span class="w3s-header">Dropdown (Left)</span>
-						<div class="w3s-body">Dropdown box Content</div>
-					</div><br /><br />
-					<div class="w3s-dropdown w3s-lalign w3s-right">
-						<span class="w3s-header">Dropdown (Right)</span>
-						<div class="w3s-body">Dropdown box Content</div>
-					</div>
-			</td></tr>
-		</table>
     </div></div>
     <p class="w3s-clear" />
 	<br />
