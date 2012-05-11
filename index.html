@@ -451,23 +451,69 @@ div.widget {border-bottom:1px dotted gray;}
             <tr><td>Action</td>
                 <td><pre>&lt;a href="ajax-action-url" class="w3s-trigger" name="action"<br /> rel="Do you really want to continue?"&gt;Ajax Action&lt;/a&gt;</pre></td>
                 <td><div class="w3s-button"><a href="../examples/ajax.html?2" class="w3s-trigger" name="action" rel="Do you really want to continue?">Ajax Action</a></div></td></tr>
-			<tr><td>Dropdown Box</td><td><pre>
-&lt;div class="w3s-dropdown"&gt;&lt;
-    span class="w3s-header"&gt;Dropdown&lt;/span&gt;
-    &lt;div class="w3s-body"&gt;Dropdown box Content&lt;/div&gt;
-&lt;/div&gt;
-				</pre></td><td valign="top">
-					<div class="w3s-dropdown">
-						<span class="w3s-header">Dropdown (Left)</span>
-						<div class="w3s-body">Dropdown box Content</div>
-					</div><br /><br />
-					<div class="w3s-dropdown w3s-lalign w3s-right">
-						<span class="w3s-header">Dropdown (Right)</span>
-						<div class="w3s-body">Dropdown box Content</div>
-					</div>
-			</td></tr>
 		</table>
 		</div>
+    </div></div>
+    <p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;">
+        <table class="w3s-list">
+			<caption>Trigger Definitions</caption>
+			<tr><td>Format</td>
+			<td>&lt;a class="w3s-trigger/mover ..." name="" target="" title="" href="" rev="" rel=""&gt;Trigger&lt;/a&gt;</td></tr>
+			<tr><th>Attribute</th><th>Description</th></tr>
+			<tr><td>name</td><td>
+				<div class="w3s-grid" style="height:15em;">
+				<table>
+				<caption>Name Definition</caption>
+				<tr class="w3s-title"><th>Value</th><th>Description</th></tr>
+				<tr><td><strong>popup</strong></td><td>Popup in the middle of window, mostly with modal.</td></tr>
+				<tr><td><strong>overlap</strong></td><td>Box which overlays on the specific target DOM.</td></tr>
+				<tr><td><strong>float</strong></td><td>Float box which floats beside the specific target DOM.</td></tr>
+				<tr><td><strong>action</strong></td><td>Ajax with JSON response.</td></tr>
+				<tr><td><strong>load</strong></td><td>Ajax loading into target DOM.</td></tr>
+				<tr><td><strong>reload</strong></td><td>Reloading target box or closest box which original content is ajax loading.</td></tr>
+				<tr><td><strong>clone</strong></td><td>Clone current line which has class w3s-clone.</td></tr>
+				<tr><td><strong>close</strong></td><td>Close current popup or loverlap box.</td></tr>
+				<tr><td><strong>reset</strong></td><td>Reset closest or target form.</td></tr>
+				<tr><td><strong>submit</strong></td><td>Submit closeast or target form.</td></tr>
+				<tr><td><strong>trigger</strong></td><td>Trigger click event on target DOM.</td></tr>
+				<tr><td><strong>callback</strong></td><td>Call target function with data in <strong>rev</strong> (separated by ',').</td></tr>
+				</table></div></td></tr>
+			<tr><td>class</td><td><strong>trigger</strong>:triggered by click event, <strong>mover</strong>:triggered by mouseover event.</td></tr>
+			<tr><td>class (optional)</td><td><strong>modal</strong> for popup only, <strong>inline</strong> float comments box</td></tr>
+			<tr><td>target (optional)</td><td>Target DOM for ajax loading</td></tr>
+			<tr><td>title (optional)</td><td>Title for popup or overlap, float</td></tr>
+			<tr><td>href (optional)</td><td>URL for ajax, Dom ID (e.g. #id) for static info box (mouseover float box), or <strong>_token</strong> value for ajax submit (POST or GET).</td></tr>
+			<tr><td>rel (optional)</td><td>Confirmation text. Mostly used for name is action. e.g. rel="<em>Delete it?</em>"</td></tr>
+			<tr><td>rev (optional)</td><td>Additional param field ids for post when name is "action", e.g. rev="<em>p1,p2,...</em>"</td></tr>
+		</table>
+	</div></div>
+    <p class="w3s-clear" />
+    <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;">
+        <table class="w3s-list">
+        <caption>Ajax JSON Response Defintion</caption>
+        <tr><td>Format</td><td>{success:<em>value</em>, message:<em>value</em>, ...}</td></tr>
+        <tr><th>Parameter</th><th>Description</th></tr>
+        <tr><td align="center"><strong>success</strong><br />(mandatory)</td>
+            <td><table class="w3s-list">
+                <tr><td>(bool) <strong>true/false</strong></td><td>processed OK or Failure</td></tr>
+                <tr><td>(string) <strong>close</strong></td><td>Close current W3S box (popup, overlap or float)</td></tr>
+                <tr><td>(string) <strong>reset</strong></td><td>Reset the form in current W3S box</td></tr>
+                <tr><td>(string) <strong>reload</strong></td><td>Reload page or W3S box specified (res.target).</td></tr>
+                <tr><td>(string) <strong>reset&reload</strong></td><td>Reset the form in current W3S box and reload W3S box specified (res.target)</td></tr>
+                <tr><td>(string) <strong>close&reload</strong></td><td>Close current W3S box and reload W3S box which is specified in target</td></tr>
+                <tr><td>(string) <strong>trigger</strong></td><td>Trigger the W3S trigger (res.target) with specified type (res.action)</td></tr>
+                <tr><td>(string) <strong>close&trigger</strong></td><td>Close current W3S box and trigger the W3S trigger (res.target) with specified type (res.action)</td></tr>
+                <tr><td>(string) <strong>load</strong></td><td>Load res.url into DOM specified (res.target)</td></tr>
+                <tr><td>(string) <strong>close&load</strong></td><td>Close current W3S box and load res.url into DOM specified (res.target)</td></tr>
+                <tr><td>(string) <strong>call</strong></td><td>Call local function which is specified target (res.target)</td></tr>
+            </table></td></tr>
+        <tr><td><strong>message</strong>(optional)</td><td>The message will be popupped in alert window.</td></tr>
+        <tr><td><strong>target</strong>(optional)</td><td>DOM Id for operation.</td></tr>
+        <tr><td><strong>url</strong>(optional)</td><td>URL for ajax loading.</td></tr>
+        <tr><td><strong>data</strong>(optional)</td><td>Parameters (seperated by ',') for calling function.</td></tr>
+        <tr><td><strong>action</strong>(optional)</td><td>For "trigger" success. The action name.</tr>
+        </table>
     </div></div>
     <p class="w3s-clear" />
     <div class="w3s-wrapper widget"><div style="padding:1em;margin:0;background:#fff; min-height:150px;position:relative;">
@@ -494,6 +540,21 @@ div.widget {border-bottom:1px dotted gray;}
 			<tr><td>Autocomplete</td><td><pre>
 &lt;input type="text" class="w3s-autocomplete" src="#_w3s_autocomplete"/&gt;</pre></td>
 			    <td><input type="text" class="w3s-autocomplete" width="100px;" src="#_w3s_autocomplete"/><span class="w3s-hidden" id="_w3s_autocomplete">automobile,car,care,hi</span></td></tr>
+			<tr><td>Dropdown Box</td><td><pre>
+&lt;div class="w3s-dropdown"&gt;&lt;
+    span class="w3s-header"&gt;Dropdown&lt;/span&gt;
+    &lt;div class="w3s-body"&gt;Dropdown box Content&lt;/div&gt;
+&lt;/div&gt;
+				</pre></td><td valign="top">
+					<div class="w3s-dropdown">
+						<span class="w3s-header">Dropdown (Left)</span>
+						<div class="w3s-body">Dropdown box Content</div>
+					</div><br /><br />
+					<div class="w3s-dropdown w3s-lalign w3s-right">
+						<span class="w3s-header">Dropdown (Right)</span>
+						<div class="w3s-body">Dropdown box Content</div>
+					</div>
+			</td></tr>
 		</table>
     </div></div>
     <p class="w3s-clear" />
