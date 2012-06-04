@@ -54,7 +54,7 @@ header a {
   color: #0069ba;
   text-shadow: #0090ff 0px 0px 2px;
 }
-
+footer a {text-decoration:none;color:#ddd;}
 footer a:hover {
   color: #43adff;
   text-shadow: #0090ff 0px 0px 2px;
