@@ -197,9 +197,8 @@ W3S.Core.Ajax = {
     },
     //reload a W3S box with the url stored in the W3S.Core.Store.Dom
     refresh: function(targetId) {
-		var id = targetId;
 		var target = $(W3S.Core.Util.formatId(targetId));
-		while (target.not('body')&&!target.siblings('.w3s-store_url')) {
+		while (target.not('body')&&target.siblings('.w3s-store_url').length<1) {
 			// find cloisest reloadable target
 			target = target.parent();
 		}
@@ -209,6 +208,7 @@ W3S.Core.Ajax = {
 			return false;
 		}
 		// reload target
+		var id = target.getAttr('id');
 		var url = W3S.Core.Store.Dom.get(id, 'url');
         W3S.Core.Ajax.action(url, id,{},{'refresh':true});
         return false;
@@ -505,8 +505,11 @@ W3S.Core.Event.Handler = {
     popup: function(boxId, options) {
         var body = $(W3S.Core.Util.formatId(boxId)+'>.w3s-body');
         var bodyDiv = $(W3S.Core.Util.formatId(boxId)+'>.w3s-body>div');
-        body.width(bodyDiv.outerWidth(true)).height(bodyDiv.outerHeight(true));
-        $(W3S.Core.Util.formatId(boxId)).width(body.outerWidth(true)).height(body.outerHeight(true));
+		var box = $(W3S.Core.Util.formatId(boxId));
+        body.width(bodyDiv.outerWidth(true));
+		body.height(bodyDiv.outerHeight(true));
+        box.width(body.outerWidth(true));
+		box.height(body.outerHeight(true));
         W3S.Core.Util.center(boxId);
         if (options.url) W3S.Core.Store.Dom.set(options.bodyId, 'url', options.url);
     }
