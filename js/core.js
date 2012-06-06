@@ -15,6 +15,8 @@ W3S.Core.sequence = W3S.Core.sequence || 1;  // shared sequence for generic use
 W3S.Core.curTrigger;
 W3S.Core.Store = W3S.Core.Store||{};
 W3S.Core.Boxes = {'tab':'.w3s-tab','accordion':'.w3s-accordion','rotator':'.w3s-rotator','grid':'.w3s-grid','tree':'.w3s-tree','dropdown':'.w3s-dropdown','autocomplete':'.w3s-autocomplete'};
+W3S.Core.Constant = W3S.Core.Constant||{};
+W3S.Core.Constant.undefined;
 
 // To avoid headache garbage collection, save varable into document with w3s-hidden div DOM within target DOM,
 // then all variables related to target DOM will be gone if target DOM is removed.
@@ -371,7 +373,7 @@ W3S.Core.Event = {
         return true;
     },
     resize: function(evt){
-        var container = evt.currentTarget.nodeName == undefined?'body':evt.currentTarget;
+        var container = evt.currentTarget.nodeName===W3S.Core.Constant.undefined?'body':evt.currentTarget;
         $(container).find(':visible.w3s-mainbox').w3sBox('resize');
     }
 };
@@ -464,7 +466,8 @@ W3S.Core.Event.Handler = {
                 }
                 var conf = {'dataType':'json','beforeSubmit':W3S.Core.Ajax.beforeSubmit,'success':W3S.Core.Ajax.success};
                 if (form.find('input[type="file"]').length>0) conf['dataType'] = 'html';
-                if (form.is('.w3s-ajax')) {
+                if (form.is('.w3s-ajax')&&(form.data('events')===W3S.Core.Constant.undefined||form.data('events').submit.length<1)) {
+					// for the form haven't bind submit event
                     if (jQuery().ajaxForm) {    // check plugin first
                         // jquery third-party plugin ajaxForm installed
                         form.ajaxForm(conf);
@@ -475,10 +478,10 @@ W3S.Core.Event.Handler = {
                 }
                 if (!form.find('input[name="_token"]').length) {
                     var token = trigger.text();
-                    if (options.url&&options.url.length>1) {
+                    if (options.url&&options.url!=='#') {
                         token = options.url.substr(0,1)=='#'?options.url.substr(1):options.url;
                     }
-                    form.append('<input type="hidden" name="_token" value="'+token+'" />');
+                    form.append('<input type="hidden" name="_button" value="'+token+'" />');
                 }
                 form.trigger('submit');
                 break;
@@ -574,7 +577,7 @@ W3S.Core.Event.Handler = {
             
             var conf = {
                 'headerCls':$.inArray('w3s-noHeader', options.attr)>=0?'w3s-hidden':'',
-                'title':options.title==undefined?'Popup Window':options.title,
+                'title':options.title===W3S.Core.Constant.undefined?'Popup Window':options.title,
                 'topBtns':topBtn,
                 'callback':options.callback
             };
