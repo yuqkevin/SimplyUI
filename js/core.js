@@ -296,7 +296,7 @@ W3S.Core.Ajax = {
                     'left:'+pos.left+'px;top:'+pos.top+'px;'+
                     'height:'+cover.outerHeight()+'px;width:'+cover.outerWidth()+'px;"></div>');
         // 100% height doesn't work in some cases
-        var errorMsg = W3S.Core.Ajax.fieldValidation(form, {errCls:'w3s-error'});
+        var errorMsg = W3S.Core.Ajax.formValidation(form, {errCls:'w3s-error'});
         if (errorMsg) {
             $('.w3s-loading').remove();
             W3S.Core.Util.print(errorMsg);
@@ -305,37 +305,63 @@ W3S.Core.Ajax = {
         return true;
     },
     // field data verification
-    fieldValidation: function(form, options) {
+    // check value with type given by class and return error code if error or empty string if OK
+    fieldValidation: function(field, tagOptions) {
+		var tags = {
+			'w3s-data-mandatory':'[^\\s]',
+			'w3s-data-alphaNum':'\\w',
+			'w3s-data-alpha':'[A-z]',
+			'w3s-data-numeric':'[0-9]',
+			'w3s-data-hex':'[0-9a-fA-F]',
+			'w3s-data-email':'[^@]+@[^@\.]+\.[^@]+',
+			'w3s-data-date-ymd':'\\d{4}[\\/\\.]?\\d\\d[\\/\\.]?\\d\\d',
+			'w3s-data-date-dmy':'\\d\\d\\/?\\d\\d\\/?\\d{4}',
+			'w3s-data-date-mdy':'\\d\\d\\/?\\d\\d\\/?\\d{4}'
+		};
+        if (tagOptions) $.extend(tags, tagOptions);
+		var val = $.trim(field.val());
+		var classes = field.getAttr('class').split(/\s+/);
+		for (var i in classes) {
+			var type = classes[i];
+			for (var tag in tags) {
+				var rexp = tags[tag];
+				if (type==='w3s-data-mandatory') {
+					rexp +='+';
+				} else if (!val) {
+					return '';
+				} else if (type!==tag) {
+					if (type.indexOf(tag)!==-1) {
+						var len = parseInt(type.substr(tag.length));
+						if (len>0) {
+							// tag with length specific. e.g w3s-data-mandatory5 means at least 5 chars
+							rexp +='{'+len+',}';
+						}
+					} else {
+						continue;
+					}
+				}
+				rexp = '^'+rexp+'$';
+				return val.search(rexp)===-1?tag:'';
+			}
+		}
+        return '';
+    },
+    // form data validation
+    formValidation: function(form, options) {
         var conf = {
-            'errCls':'red'
+            'errCls':'w3s-invalid',
+			'tags':null	// verify tag object {code1:regexp1,code2:regexp2,...}
         };
         if (options) $.extend(conf, options);
-        var failure = false;
-        form.find('.w3s-mandatory').each(function() {
-            $(this).removeClass(conf.errCls);
-            if (!$(this).val().match(/[^\s]+/)) {
+        var error = '';
+        form.find(':input:visible').each(function(){
+            error = W3S.Core.Ajax.fieldValidation($(this), conf.tags);
+            if (error) {
                 $(this).addClass(conf.errCls);
-                failure = true;
+                return error;
             }
         });
-        if (failure) return 'DataInsufficient';
-        form.find('.w3s-data-alphaNum').each(function() {
-            $(this).removeClass(conf.errCls);
-            if (!$(this).val().match(/^s*\w+\s*$/i)) {
-                failure = true;
-                $(this).addClass(conf.errCls);
-            }
-        });
-        if (failure) return 'InvalidDataFormat';
-        form.find('.w3s-data-email').each(function() {
-            $(this).removeClass(conf.errCls);
-            if (!$(this).val().match(/^[^@]+@[^@\.]+\.[^@]+$/i)) {
-                $(this).addClass(conf.errCls);
-                failure = true;
-            }
-        });
-        if (failure) return 'InvalidEmailAddress';
-        return '';
+        return error;
     }
 };
 // W3S Event switch
