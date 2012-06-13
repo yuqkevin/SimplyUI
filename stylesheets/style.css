@@ -6,7 +6,7 @@ by Jason Costello, @jsncostello
 /*******************************************************************************
 MeyerWeb Reset
 *******************************************************************************/
-
+header {position:relative;}
 header h1, header h2,  {
   margin: 10px 0;
   font-weight: 700;
