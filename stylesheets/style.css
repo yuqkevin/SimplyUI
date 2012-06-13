@@ -21,13 +21,13 @@ MeyerWeb Reset
 
 #header h2 {
   padding-bottom: 10px;
-  font-size: 32px;
+  font-size: 26px;
   background: url('../images/bg_hr.png') repeat-x bottom;
 }
 
 #header a {
   text-decoration: none;
-  color: #007edf;
+  /*** color: #007edf;***/
   text-shadow: none;
 
   transition: color 0.5s ease;
