@@ -168,8 +168,8 @@ W3S.Core.Ajax = {
         }
         if (options) $.extend(conf, options);
         if (conf.noCache) url += (url.search(/\?/)==-1?'?':'&')+new Date().getTime();
-        var targetId = W3S.Core.Util.formatId(id);
-        if (targetId) {
+        if (id) {
+        	var targetId = W3S.Core.Util.formatId(id);
             W3S.Core.curTarget = targetId;
             var target = $(targetId);
             var pos = target.position();
@@ -201,9 +201,11 @@ W3S.Core.Ajax = {
     //reload a W3S box with the url stored in the W3S.Core.Store.Dom
     refresh: function(targetId) {
 		var target = $(W3S.Core.Util.formatId(targetId));
-		while (target.prop('tagName')!='BODY'&&target.siblings('.w3s-store_url').length<1) {
-			// find cloisest reloadable target
-			target = target.parent();
+		if (target.length) {
+			while (target.prop('tagName')!='BODY'&&target.siblings('.w3s-store_url').length<1) {
+				// find cloisest reloadable target
+				target = target.parent();
+			}
 		}
 		if (target.is('body')) {
 			// not found, reload whole page instead
@@ -247,6 +249,8 @@ W3S.Core.Ajax = {
                 if (res.target) {
 					if (res.url) {
                         W3S.Core.Ajax.action(res.url, res.target);
+					} else if (res.target=='trigger') {
+						W3S.Core.Ajax.refresh(W3S.Core.TopVar.trigger.attr('id'));
 					} else {
 						W3S.Core.Ajax.refresh(res.target);
 					}
@@ -795,6 +799,51 @@ W3S.Core.Event.Handler = {
         },
         dropdown: function(options) {
             var eventHandler = function(evt){
+                var target = $(evt.currentTarget);
+				var item = target.find('.w3s-header').first();
+                if (evt.type=='click') {
+					item.toggleClass('w3s-open');
+				} else if (evt.type=='mouseenter') {
+					if (item.hasClass('w3s-open')) return false;
+					item.addClass('w3s-open');
+				} else {
+					if ($(evt.target).hasClass('w3s-body')) {
+						item.removeClass('w3s-open');
+					} else {
+						return false;
+					}
+				}
+                if (item.is('.w3s-open')) target.css({'position':'relative','z-index':100});
+                item.siblings('.w3s-body').slideToggle(200,function(){
+                    if (item.is('.w3s-open')) {
+                        target.find('input[type=text]').first().focus();
+                    } else {
+						
+                        //target.css('position','static'); // keep dom's position default when closed
+                    }
+                });
+                return true;
+            }
+            return this.each(function(){
+                if ($(this).is(':visible:not(.w3s-stop)')) {
+                    $(this).addClass('w3s-stop');
+                    var header = $(this).find(':visible.w3s-header').first();
+                    var tr_w = header.outerWidth();
+                    var tr_h = header.height()+(header.outerHeight()-header.height())/2;
+                    var left = $(this).is('.w3s-lalign');
+                    var body = $(this).find('.w3s-body').css({'min-width':tr_w,'top':tr_h}).addClass('w3s-stop'); // forbidden resize,grid,... in dropdown;
+                    if (left) {
+                        var offset = body.outerWidth()-tr_w;
+                        body.css({'left':'-'+offset+'px'});
+                    }
+					var evtTypes = 'mouseleave ';
+					evtTypes += $(this).hasClass('w3s-event-mouseenter')?'mouseenter':'click';
+                    $(this).bind(evtTypes, eventHandler);
+                }
+            });
+        },
+        dropdownx: function(options) {
+            var eventHandler = function(evt){
                 var item = $(evt.currentTarget);
                 item.toggleClass('w3s-open');
                 if (item.is('.w3s-open')) item.closest('.w3s-dropdown').css({'position':'relative','z-index':100});
@@ -1032,7 +1081,7 @@ W3S.Core.Event.Handler = {
             if ($(this).find('input[type="file"]').length>0) {
                 // form with file uploading, using iframe to do the job
                 // insert ifrme dom
-                var form_id = $(this).attr('id');
+                var form_id = $(this).getAttr('id');
                 if (!form_id) {
                     form_id = '_w3s-from-'+(++W3S.Core.sequence);
                     $(this).attr('id', form_id);
@@ -1053,7 +1102,7 @@ W3S.Core.Event.Handler = {
                         var res = $(this).contents().find('body').html();
                         // remove iframe (the little delay is to satisfy FF or the connecting icon may keep alive)
                         setTimeout(function(){$('#'+id).remove();},    100);
-                        // convert content of iframe into json and send result to success handler
+                        // convert content of iframe into json and send result to success handleR
                         if (res) conf.success(jQuery.parseJSON(res));
                         return false;
                     });
