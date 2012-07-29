@@ -807,7 +807,7 @@ W3S.Core.Event.Handler = {
 					if (item.hasClass('w3s-open')) return false;
 					item.addClass('w3s-open');
 				} else {
-					if ($(evt.target).hasClass('w3s-body')) {
+					if ($(evt.target).hasClass('w3s-header')||$(evt.target).hasClass('w3s-body')) {
 						item.removeClass('w3s-open');
 					} else {
 						return false;
