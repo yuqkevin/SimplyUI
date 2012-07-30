@@ -193,7 +193,7 @@ W3S.Core.Ajax = {
             });
             return false;
         }
-        var param = {'ajax':true};
+        var param = {'ajax':true,'_page_url':window.location.pathname};
         if (!jQuery.isEmptyObject(data)) $.extend(param, data);
         $.ajax({url:url,data:param,dataType:'json',success:W3S.Core.Ajax.success,type:'post'});
         return false;
@@ -1117,7 +1117,7 @@ W3S.Core.Event.Handler = {
                         // form without file uploading
                         jQuery.post(
                             conf.url,
-                            $(this).serialize(),
+                            $(this).serialize()+'&_page_url=' + encodeURIComponent(window.location.pathname),
                             conf.success,
                             conf.dataType
                         );
