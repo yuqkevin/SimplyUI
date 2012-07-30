@@ -817,9 +817,6 @@ W3S.Core.Event.Handler = {
                 item.siblings('.w3s-body').slideToggle(200,function(){
                     if (item.is('.w3s-open')) {
                         target.find('input[type=text]').first().focus();
-                    } else {
-						
-                        //target.css('position','static'); // keep dom's position default when closed
                     }
                 });
                 return true;
@@ -836,8 +833,8 @@ W3S.Core.Event.Handler = {
                         var offset = body.outerWidth()-tr_w;
                         body.css({'left':'-'+offset+'px'});
                     }
-					var evtTypes = 'mouseleave ';
-					evtTypes += $(this).hasClass('w3s-event-mouseenter')?'mouseenter':'click';
+					var evtTypes = 'mouseleave click ';
+					evtTypes += $(this).hasClass('w3s-event-mouseenter')?'mouseenter':null;
                     $(this).bind(evtTypes, eventHandler);
                 }
             });
