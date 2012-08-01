@@ -219,14 +219,14 @@ W3S.Core.Ajax = {
         return false;
     },
     // handler for success ajax post
-    success: function(response, status, xhr, f) {
-        var form = f?f:$('form').first();  // for version <1.4, no xhr defined, the third argv is f and no 4th argv
-		var wrapper = form.closest('.w3s-wrapper');
+    success: function(response) {
+		var loadingCover = $('.w3s-loading');
+		var wrapper = loadingCover.closest('.w3s-wrapper');
+        loadingCover.remove();
 		if (wrapper.length<1) {
 			wrapper = $('.w3s-wrapper').first();
 			form = wrapper.find('form').first();
 		}
-        $('.w3s-loading').remove();
         var res;
         if (typeof response=='string') {
             if (response=='reload') {
@@ -527,6 +527,12 @@ W3S.Core.Event.Handler = {
                 } else {
                     form.append('<input type="hidden" name="_button" value="'+btnText+'" />');
 				}
+				var formId = form.getAttr('id');
+				if (formId.length<1) {
+					formId = 'jax-form-'.(++W3S.Core.sequence);
+					form.attr('id', formId);
+				}
+				form.append('<input type="hidden" name="_form" value="'+formId+'" />');
                 form.trigger('submit');
                 break;
             case 'popup':
