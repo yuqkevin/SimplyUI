@@ -181,16 +181,25 @@ W3S.Core.Ajax = {
             //    remoteUrl = url+(url.search(/\?/)==-1?'?':'&')+decodeURIComponent($.param(data));
             }
             W3S.Core.Store.Dom.set(targetId, 'url', remoteUrl);
-            target.load(remoteUrl,data,function(res){
-                if (conf.refresh) {
-                    // remove header and footer, refresh content only.
-                    target.find('.w3s-header').remove();
-                    target.find('.w3s-footer').remove();
-                }
-                W3S.Core.Util.widgetScan($(this));
-                $(this).find(':visible.w3s-mainbox').first().w3sBox('resize');
-                $('.w3s-loading').remove();
-            });
+			// load content or replace?
+			if (target.hasClass('w3s-ajax-replaceable')) {
+				// replace DOM
+				$.post(remoteUrl,data, function(res) {
+				     target.replaceWith(res);
+				});
+			} else {
+				// load content only
+                target.load(remoteUrl,data,function(res){
+                    if (conf.refresh) {
+                        // remove header and footer, refresh content only.
+                        target.find('.w3s-header').remove();
+                        target.find('.w3s-footer').remove();
+                    }
+                    W3S.Core.Util.widgetScan($(this));
+                    $(this).find(':visible.w3s-mainbox').first().w3sBox('resize');
+                    $('.w3s-loading').remove();
+                });
+			}
             return false;
         }
         var param = {'ajax':true,'_page_url':window.location.pathname};
