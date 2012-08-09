@@ -186,7 +186,8 @@ W3S.Core.Ajax = {
 			if (target.hasClass('w3s-ajax-replaceable')||conf.replace) {
 				// replace DOM
 				$.post(remoteUrl,data, function(res) {
-				     target.replaceWith(res);
+				    target.replaceWith(res);
+                   	$('.w3s-loading').remove();
 				});
 			} else {
 				// load content only
