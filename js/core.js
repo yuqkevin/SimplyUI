@@ -164,6 +164,7 @@ W3S.Core.Ajax = {
     action: function(url, id, data, options){
         var conf = {
             'noCache':options&&options.attr&&$.inArray('w3s-nocache', options.attr)>=0,
+			'replace':options&&options.attr&&$.inArray('w3s-replace', options.attr)>=0,	// replace target itself or just refresh target content
             'refresh':false  // reload in box
         }
         if (options) $.extend(conf, options);
@@ -182,7 +183,7 @@ W3S.Core.Ajax = {
             }
             W3S.Core.Store.Dom.set(targetId, 'url', remoteUrl);
 			// load content or replace?
-			if (target.hasClass('w3s-ajax-replaceable')) {
+			if (target.hasClass('w3s-ajax-replaceable')||conf.replace) {
 				// replace DOM
 				$.post(remoteUrl,data, function(res) {
 				     target.replaceWith(res);
@@ -538,7 +539,7 @@ W3S.Core.Event.Handler = {
 				}
 				var formId = form.getAttr('id');
 				if (formId.length<1) {
-					formId = 'jax-form-'.(++W3S.Core.sequence);
+					formId = 'ajax-form-'+(++W3S.Core.sequence);
 					form.attr('id', formId);
 				}
 				form.append('<input type="hidden" name="_form" value="'+formId+'" />');
@@ -848,7 +849,7 @@ W3S.Core.Event.Handler = {
                         var offset = body.outerWidth()-tr_w;
                         body.css({'left':'-'+offset+'px'});
                     }
-					var evtTypes = 'mouseleave click ';
+					var evtTypes = 'click ';
 					evtTypes += $(this).hasClass('w3s-event-mouseenter')?'mouseenter':null;
                     $(this).bind(evtTypes, eventHandler);
                 }
