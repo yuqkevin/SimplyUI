@@ -157,7 +157,17 @@ W3S.Core.Util = {
         } else {
             alert(message);
         }
-    }
+    },
+	clientDimension: function() {
+		return {
+            'ajax':true,
+            '_page_url':window.location.pathname,
+            '_screen_width':$(window).width(),      // screen width
+            '_screen_height':$(window).height(),    // screen height
+            '_layout_width':$('body>div.w3s-layout>div.w3s-wrapper').width(),   // width of effective area in layout
+            '_layout_height':$('body>div.w3s-layout>div.w3s-wrapper').height()  // height of effective area in layout
+		};
+	}
 };
 W3S.Core.Ajax = {
     // regular ajax action handler
@@ -204,7 +214,7 @@ W3S.Core.Ajax = {
 			}
             return false;
         }
-        var param = {'ajax':true,'_page_url':window.location.pathname};
+        var param = W3S.Core.Util.clientDimension();
         if (!jQuery.isEmptyObject(data)) $.extend(param, data);
         $.ajax({url:url,data:param,dataType:'json',success:W3S.Core.Ajax.success,type:'post'});
         return false;
@@ -402,7 +412,8 @@ W3S.Core.Event = {
         if (!a.getAttr('rel') || confirm(a.attr('rel'))) {
             W3S.Core.Event.Handler.triggerParse(a, evt);
         }
-        return a.hasClass('w3s-stop')?false:true;
+		return false;
+//        return a.hasClass('w3s-stop')?false:true;
     },
     cell: function(evt) {
         evt.preventDefault();
@@ -655,12 +666,13 @@ W3S.Core.Event.Handler = {
                     $(url).clone().removeAttr('id').removeClass('w3s-hidden').appendTo('#'+bodyId);
                     if (conf.callback && typeof(conf.callback) === "function") conf.callback(boxId, data);
                 } else {
-                      $('#'+bodyId).addClass('w3s-loading').load(url, function(res){
+                    var param = W3S.Core.Util.clientDimension();
+                    $('#'+bodyId).addClass('w3s-loading').load(url, param, function(res){
                         W3S.Core.Util.widgetScan($(this));
                         $(this).removeClass('w3s-loading').after($(this).find('div.w3s-footer'));
                         $(this).closest('.w3s-wrapper').find(':visible.w3s-mainbox').first().w3sBox('resize');
                         if (conf.callback && typeof(conf.callback) === "function") conf.callback(boxId, data);
-                     });
+                    });
                 }
             });
         },
