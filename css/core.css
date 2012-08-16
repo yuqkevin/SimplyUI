@@ -28,11 +28,11 @@ body>div.w3s-footer, body>div.w3s-body, body>div.w3s-footer {
 	background-color:#eee;
 }
 
-body>div>div.w3s-wrapper>div.w3s-column {
+body>div.w3s-layout>div.w3s-wrapper>div.w3s-column {
 	float:left;
 	min-height:100px;
 }
-body>div>div.w3s-wrapper {
+body>div.w3s-layout>div.w3s-wrapper {
 	width:1024px;
 	padding:0;
 	margin:0 auto;
@@ -192,10 +192,10 @@ div.w3s-box .w3s-footer {padding:5px;height:30px;background:#E2ECB2;border-top:1
 div.w3s-box .w3s-footer div.w3s-button {float:right;padding-right:1em;}
 div.w3s-box .w3s-footer div.w3s-button a {background:#fff;color:#333;font-weight:bold;}
 
-div.w3s-float {position:absolute,z-index:100;border-width:1px;border-style:solid;}
+div.w3s-float {position:absolute;z-index:100;border-width:1px;border-style:solid;}
 div.w3s-modal {position:fixed;left:0;top:0;height:100%;width:100%;background:url('images/op1px.png');}
 div.w3s-overlap {background:#A8BD4E;filter:alpha(opacity=90); opacity:0.9;}
-div.w3s-overlap div.w3s-box {margin:0;padding:0;border:1px solid #788B21;height:100%;overflow:hidden;}
+div.w3s-overlap div.w3s-box {margin:0;padding:0;border:1px solid #788B21;width:100%;height:100%;overflow:hidden;}
 
 /*** table ***/
 table tr.w3s-none td {background:transparent;border:0 !important;}
@@ -207,14 +207,14 @@ table.w3s-list tr:hover >td {border-bottom-style:solid;background:#fff;}
 table.w3s-list caption {
     background:url(images/table.png) no-repeat left center;
     margin:5px 0;
-    padding:0 20px;
-    height:18px;
+    padding:2px 20px;
     font-family:Arial;
-    font-size:15px;
-    font-weight:bold;
+    font-size:1em;
+    font-weight:normal;
+	font-variant:small-caps;
     text-decoration:none;
 }
-
+table.w3s-list caption a {margin-left:1em;font-size:.9em;font-weight:normal;font-variant:normal;color:#333;}
 /*** grid ***/
 .w3s-grid {padding:0;margin:0;border:0;}
 .w3s-grid >div {border:1px solid #AAAAAA;}
