@@ -96,6 +96,27 @@ W3S.Core.Util = {
         var offset = (rightNow - gmTime) / (1000 * 60 * 60);
         return offset>0?Math.ceil(offset):Math.floor(offset);
     },
+	//get maximum height in the ancestry
+	getHeight: function(obj) {
+		var h = obj.outerHeight(true);
+		obj.parents().each(function(){
+			if ($(this).height()<h) {
+				if ($(this).height()) {
+					h = $(this).height();
+				} else {
+					return h;	// the dom is float
+				}
+			}
+		});
+		return h;
+	},
+    getWidth: function(obj) {
+        var w = obj.outerWidth(true);
+        obj.parents().each(function(){
+            if ($(this).width()<w) w = $(this).width();
+        });
+        return w;
+    },
     //cookie setter
     setCookie: function(name, val, days) {
         var today=new Date();
@@ -451,7 +472,8 @@ W3S.Core.Event.Handler = {
         var extra = trigger.hasAttr('rev')?trigger.attr('rev'):'';
         for (i=0;i<types.length;i++) {
             var type = types[i];
-            var target = W3S.Core.Util.formatId(targets[i]);
+			// special target: w3s-wrapper will search w3s-wrapper in parents and use its directly child as target
+            var target = W3S.Core.Util.formatId(targets[i]=='w3s-wrapper'?trigger.parentsUntil('.w3s-wrapper').last().attr('id'):targets[i]);
             var options = {'evtType':evt.type,'url':urls[i],'title':title,'attr':attr,'extra':extra,'pos':{'x':evt.pageX,'y':evt.pageY}};
             W3S.Core.Event.Handler.triggerHandler(trigger, target, type, options);
         }
@@ -602,8 +624,10 @@ W3S.Core.Event.Handler = {
              conf.wrapperId = '_'+conf.type+'-'+conf.idx;
             return this.each(function(){
                 $('.w3s-wrapper.'+conf.type).remove();
-                 var pos = $(this).position();
-                var style = 'style="position:absolute;left:'+pos.left+'px;top:'+pos.top+'px;height:'+$(this).outerHeight(true)+'px;width:'+$(this).outerWidth(true)+'px;"';
+                var pos = $(this).position();
+				var h = W3S.Core.Util.getHeight($(this));
+				var w = W3S.Core.Util.getWidth($(this));
+                var style = 'style="position:absolute;left:'+pos.left+'px;top:'+pos.top+'px;height:'+h+'px;width:'+w+'px;"';
                 $(this).after('<div class="w3s-wrapper '+conf.type+'" id="'+conf.wrapperId+'" '+style+'></div>');
                 $('#'+conf.wrapperId).w3sBox('box', url, conf);
             });

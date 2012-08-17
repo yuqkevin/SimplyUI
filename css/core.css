@@ -188,7 +188,7 @@ div.w3s-box .w3s-header h1.w3s-title {padding:5px;font-size:14px;font-weight:bol
 div.w3s-box .w3s-header div.w3s-button {padding:0;float:right;font-size:13px;}
 div.w3s-box .w3s-header div.w3s-button a {padding:0;margin:2px 0;}
 div.w3s-box .w3s-body {background:white;padding:1.5em;overflow-y:auto;}
-div.w3s-box .w3s-footer {padding:5px;height:30px;background:#E2ECB2;border-top:1px solid #788B21;}
+div.w3s-box .w3s-footer {padding:5px;min-height:30px;background:#E2ECB2;border-top:1px solid #788B21;}
 div.w3s-box .w3s-footer div.w3s-button {float:right;padding-right:1em;}
 div.w3s-box .w3s-footer div.w3s-button a {background:#fff;color:#333;font-weight:bold;}
 
