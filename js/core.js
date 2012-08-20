@@ -22,30 +22,66 @@ W3S.Core.Constant.undefined;
 // To avoid headache garbage collection, save varable into document with w3s-hidden div DOM within target DOM,
 // then all variables related to target DOM will be gone if target DOM is removed.
 W3S.Core.Store.Dom = {
+	//get formated storage id for given target
+	storageId: function(target) {
+		return W3S.Core.Util.formatId(target)+'-w3s-storage';
+	},
+	//getting variable by given name for target
+	// false for invalid, otherwise returns the vale
     get: function(target, name) {
-        var targetId = W3S.Core.Util.formatId(target);
-        var storeId = '_var'+targetId.substring(1)+'-'+name;
-        return $('#'+storeId).text();
+		var storageId = W3S.Core.Store.Dom.storageId(target);
+		var storage = $('form'+storageId);
+		if (storage.length<1) return false;
+		if (name==='url') return storage.attr('method');
+		return storage.find('input[name='+name+']').length<1?false:storage.find('input[name='+name+']').val();
     },
+	//setting variable value by given name for target
+	// false if invalid setting, true for effective setting
     set: function(target, name, val) {
         var targetId = W3S.Core.Util.formatId(target);
-        var storeId = '_var'+targetId.substring(1)+'-'+name;
-		var storeCls = 'w3s-store_'+name;
-        if ($('#'+storeId).html() == null) {
-            $(targetId).addClass('w3s-target').before('<div id="'+storeId+'" class="'+storeCls+'" style="display:none;height:0;width:0;">'+val+'</div>');
-        } else {
-            $('#'+storeId).text(val);
-        }
+		var obj = $(targetId);
+		var storageId = W3S.Core.Store.Dom.storageId(target);
+		var storage = $('form'+storageId);
+		if (storage.length<1&&name!=='url') return false;	// invalid setting, must set url first;
+		if (storage.length<1) {
+			obj.addClass('w3s-component').prepend('<form id="'+storageId.substring(1)+'" class="w3s-storage" style="display:none;height:0;width:0;">' +
+						'<a href="'+val+'" class="w3s-trigger" name="refresh" target="'+targetId+'"></a></form>');
+			return true;
+		} else if (name==='url') {
+			storage.find('a.w3s-trigger').attr('href', val);
+			return true;
+		} else if (storage.find('input[name='+name+']').length>0) {
+			storage.find('input[name='+name+']').val(val);
+		} else {
+			storage.prepend('<input type="hidden" name="'+name+'" value="'+val+'" />');
+		}
+		var field = '';
+		storage.find('input[type=hidden]').each(function(){field += ','+$(this).attr('name');});
+		var trigger = storage.find('a.w3s-trigger');
+		trigger.attr('rev', field.substring(1));
+		return true;
     },
-    clear:function(target, name) {
-        var targetId = W3S.Core.Util.formatId(target);
-        var storeId = '_var'+target.substring(1)+'-'+name;
-        $('#'+storeId).remove();
-    },
-    // return closet target for given object or id
-    box: function(child) {
-        var obj = typeof child=='string'?$(W3S.Core.Util.formatId(child)):child;
-        return obj.closest('.w3s-target').attr('id');
+	//refresh specific dom (by given object or id) using closest stored component
+	refresh: function(target) {
+		var obj = typeof target=='string'?$(W3S.Core.Util.formatId(target)):target;
+		var storageId = W3S.Core.Store.Dom.storageId(obj.getAttr('id'));
+		var storage = $(storageId);
+        if (storage.length<1) {
+			// find closed stored component
+			obj = obj.closest('.w3s-component');
+			while (obj.length>0) {
+				targetId = obj.getAttr('id');
+				storageId = W3S.Core.Store.Dom.storageId(obj.getAttr('id'));
+				if ($(storageId).length>0) {
+					storage = $(storageId);
+					break;
+				}
+				obj = obj.closest('.w3s-component');
+			}
+		}
+		if (storage.length<1) return false;
+		storage.find('a.w3s-trigger').trigger('click');
+		return true;
     }
 };
 W3S.Core.Util = {
@@ -209,16 +245,15 @@ W3S.Core.Ajax = {
                 'left:'+pos.left+'px;top:'+pos.top+'px;'+
                 'height:'+target.outerHeight(true)+'px;width:'+target.outerWidth(true)+'px;"></div>');
             var remoteUrl = url;
-            if (!jQuery.isEmptyObject(data)) {
-            //    remoteUrl = url+(url.search(/\?/)==-1?'?':'&')+decodeURIComponent($.param(data));
-            }
-            W3S.Core.Store.Dom.set(targetId, 'url', remoteUrl);
 			// load content or replace?
 			if (target.hasClass('w3s-ajax-replaceable')||conf.replace) {
 				// replace DOM
 				$.post(remoteUrl,data, function(res) {
 				    target.replaceWith(res);
+                    W3S.Core.Util.widgetScan($(this));
+                    $(this).find(':visible.w3s-mainbox').first().w3sBox('resize');
                    	$('.w3s-loading').remove();
+            		W3S.Core.Store.Dom.set(targetId, 'url', remoteUrl);
 				});
 			} else {
 				// load content only
@@ -231,6 +266,7 @@ W3S.Core.Ajax = {
                     W3S.Core.Util.widgetScan($(this));
                     $(this).find(':visible.w3s-mainbox').first().w3sBox('resize');
                     $('.w3s-loading').remove();
+            		W3S.Core.Store.Dom.set(targetId, 'url', remoteUrl);
                 });
 			}
             return false;
@@ -242,23 +278,7 @@ W3S.Core.Ajax = {
     },
     //reload a W3S box with the url stored in the W3S.Core.Store.Dom
     refresh: function(targetId) {
-		var target = $(W3S.Core.Util.formatId(targetId));
-		if (target.length) {
-			while (target.prop('tagName')!='BODY'&&target.siblings('.w3s-store_url').length<1) {
-				// find cloisest reloadable target
-				target = target.parent();
-			}
-		}
-		if (target.is('body')) {
-			// not found, reload whole page instead
-			window.location.reload();
-			return false;
-		}
-		// reload target
-		var id = target.getAttr('id');
-		var url = W3S.Core.Store.Dom.get(id, 'url');
-        W3S.Core.Ajax.action(url, id,{},{'refresh':true});
-        return false;
+		return W3S.Core.Store.Dom.refresh(targetId);
     },
     // handler for success ajax post
     success: function(response) {
@@ -508,10 +528,10 @@ W3S.Core.Event.Handler = {
                 $(window).trigger('resize');
                 break;
             case 'reload':
-                var targetId = target||W3S.Core.Store.Dom.box(trigger);
-                W3S.Core.Ajax.refresh(targetId);
+				W3S.Core.Store.Dom.refresh(target||trigger);
                 break;
             case 'load':
+			case 'refresh':	// component refresh
             case 'action':
                 var data = {};
                 if (options.url.search('_token=')==-1) {
@@ -529,6 +549,7 @@ W3S.Core.Event.Handler = {
                     data['target'] = target;
                     options['target'] = '';
                 }
+				options[type] = true;
                 W3S.Core.Ajax.action(options.url, target, data, options);
                 break;
             case 'reset':
