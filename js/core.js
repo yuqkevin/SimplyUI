@@ -620,16 +620,25 @@ W3S.Core.Event.Handler = {
         $(W3S.Core.Util.formatId(options.bodyId)).addClass('w3s-mainbox').w3sBox('resize');
         if (options.url) W3S.Core.Store.Dom.set(options.bodyId, 'url', options.url);
     },
-    popup: function(boxId, options) {
+    popup: function(boxId, data, options) {
+		var offset = 60;
         var body = $(W3S.Core.Util.formatId(boxId)+'>.w3s-body');
         var bodyDiv = $(W3S.Core.Util.formatId(boxId)+'>.w3s-body>div');
 		var box = $(W3S.Core.Util.formatId(boxId));
-        body.width(bodyDiv.outerWidth(true));
-		body.height(bodyDiv.outerHeight(true));
-        box.width(body.outerWidth(true));
-		box.height(body.outerHeight(true));
+		if ($.inArray('w3s-layout-full', options.attr)>=0||$.inArray('w3s-layout-full-height', options.attr)>=0) {
+			body.height($(window).height()-offset);
+		} else {
+			body.height(bodyDiv.outerHeight(true));
+			box.height(body.outerHeight(true));
+		}
+		if ($.inArray('w3s-layout-full', options.attr)>=0||$.inArray('w3s-layout-full-width', options.attr)>=0) {
+			body.width(Math.min($(window).width(), $('.w3s-layout>div.w3s-wrapper').width())-offset);
+		} else {
+        	body.width(bodyDiv.outerWidth(true));
+	        box.width(body.outerWidth(true));
+		}
         W3S.Core.Util.center(boxId);
-        if (options.url) W3S.Core.Store.Dom.set(options.bodyId, 'url', options.url);
+        if (data.url) W3S.Core.Store.Dom.set(data.bodyId, 'url', data.url);
     }
 };
 
@@ -642,7 +651,7 @@ W3S.Core.Event.Handler = {
                 'idx': 0
             };
             if (options) $.extend(conf, options);
-             conf.wrapperId = '_'+conf.type+'-'+conf.idx;
+            conf.wrapperId = '_'+conf.type+'-'+conf.idx;
             return this.each(function(){
                 $('.w3s-wrapper.'+conf.type).remove();
                 var pos = $(this).position();
@@ -709,14 +718,14 @@ W3S.Core.Event.Handler = {
                 $(this).append('<div class="w3s-box" id="'+boxId+'">'+header+body+'</div>');
                 if (url.substr(0,1)=='#') {
                     $(url).clone().removeAttr('id').removeClass('w3s-hidden').appendTo('#'+bodyId);
-                    if (conf.callback && typeof(conf.callback) === "function") conf.callback(boxId, data);
+                    if (conf.callback && typeof(conf.callback) === "function") conf.callback(boxId, data, options);
                 } else {
                     var param = W3S.Core.Util.clientDimension();
                     $('#'+bodyId).addClass('w3s-loading').load(url, param, function(res){
                         W3S.Core.Util.widgetScan($(this));
                         $(this).removeClass('w3s-loading').after($(this).find('div.w3s-footer'));
                         $(this).closest('.w3s-wrapper').find(':visible.w3s-mainbox').first().w3sBox('resize');
-                        if (conf.callback && typeof(conf.callback) === "function") conf.callback(boxId, data);
+                        if (conf.callback && typeof(conf.callback) === "function") conf.callback(boxId, data, options);
                     });
                 }
             });
